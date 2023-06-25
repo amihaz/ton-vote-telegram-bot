@@ -4,7 +4,7 @@ import endpoints_cache
 # /daos is not used
 def daos(daoAddress):
 
-    # Запрос на json с DAOs
+    # Request for json with DAOs
     url = f'{endpoints_cache.production_api}/daos'
 
     try:
@@ -14,13 +14,13 @@ def daos(daoAddress):
         return data
 
     except Exception as e:
-        print('Произошла ошибка при выполнении запроса (/daos):', e)
+        print('An error occurred while executing the request (/daos):', e)
 
 # print(daos('EQDi7_28cJItXu5t5evsnEKNtUYv_1aQve21T4bzFxbxJ8HF'))
 
 
 def daoAddressInfo(daoAddress):
-    # Запрос на json с предложениями по DAO
+    # Request for json with DAO proposals
     url = f'{endpoints_cache.production_api}/dao/{daoAddress}'
 
     try:
@@ -40,14 +40,14 @@ def daoAddressInfo(daoAddress):
         return name, about, avatar, website, telegram, github, countProposals, daoProposals
 
     except Exception as e:
-        print('Произошла ошибка при выполнении запроса (/dao/daoAddress):', e)
+        print('An error occurred while executing the request (/dao/daoAddress):', e)
 
 # print(daoAddressInfo('EQA-Qno-vCjLbDJXxOB-vhHY8sH8hVbH4if-iSMi-JwaIdP4'))
 
 
 def proposalAddressInfo(proposalAddress):
 
-    # Запрос на json с предложениями по DAO
+    # Request for json with DAO proposals
     url = f'{endpoints_cache.production_api}/proposal/{proposalAddress}'
 
     try:
@@ -72,6 +72,6 @@ def proposalAddressInfo(proposalAddress):
         return title, description, daoAddress, proposalStartTime, proposalEndTime, yes, no, abstain
 
     except Exception as e:
-        print('Произошла ошибка при выполнении запроса (/proposal/proposalAddress):', e)
+        print('An error occurred while executing the request (/proposal/proposalAddress):', e)
     
 # print(proposalAddressInfo('EQDUYK1eiH8a67w0QaiHyD6Xx6Y8DpUO22B00L9nY9CdTmgQ'))

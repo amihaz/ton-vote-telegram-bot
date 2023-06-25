@@ -109,7 +109,7 @@ async def cmd_inline_url(message: types.Message):
             # Add buttons to message
             keyboard = types.InlineKeyboardMarkup(row_width=1)
             keyboard.add(*buttons)
-            await message.answer("Список DAOs ниже:", reply_markup=keyboard)
+            await message.answer("The list of DAOs is presented below:", reply_markup=keyboard)
     else:
         await message.delete()
 
