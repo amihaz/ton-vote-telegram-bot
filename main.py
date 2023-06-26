@@ -109,7 +109,7 @@ async def cmd_inline_url(message: types.Message):
             # Add buttons to message
             keyboard = types.InlineKeyboardMarkup(row_width=1)
             keyboard.add(*buttons)
-            await message.answer("Список DAOs ниже:", reply_markup=keyboard)
+            await message.answer("The list of DAOs is presented below:", reply_markup=keyboard)
     else:
         await message.delete()
 
@@ -190,12 +190,12 @@ async def handle_message(message: types.Message, state: FSMContext):
                 dao_address = message.text
                 group_id = message.chat.id
                 if api.daoAddressInfo(dao_address) is None:   
-                    await message.answer("A DAO with such an address does not exist, try a different address."), await state.finish()
+                    await message.answer("A DAO with such an address does not exist, try a different address.\n\nIf you want to try setting the DAO address again, use the /set command again."), await state.finish()
                 elif not cursor.execute(f"SELECT dao_address FROM DAOs  WHERE group_id == '{group_id}' AND dao_address == '{dao_address}'").fetchall():
                     await message.answer(f"Success\! You have entered the following address: \n```{dao_address}```\n\nYou are now receiving notifications about new proposals in your DAO, the address of which you've just entered\.\n\nFor more information, refer to the bot using the /start command in the menu to the right of the input field\.", parse_mode='MarkdownV2'), await state.finish()
                     cursor.execute(f"INSERT INTO DAOs (dao_address, group_id, name_dao, count_proposals) VALUES ('{dao_address}', '{group_id}', '{api.daoAddressInfo(dao_address)[0]}', '{api.daoAddressInfo(dao_address)[6]}')"), conn.commit() # Add a new row to the database
                 else:
-                    await message.answer("A DAO with such an address already exists."), await state.finish()
+                    await message.answer("A DAO with such an address already exists.\n\nIf you want to try setting the DAO address again, use the /set command again."), await state.finish()
         else:
             await message.delete()
             await state.finish()
