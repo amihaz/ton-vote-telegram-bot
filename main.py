@@ -254,7 +254,7 @@ async def post_new_proposal():
                 scheduler.add_job(start_proposal, "date", run_date=proposalStartTime, args=(chat_id, title, address, proposalAddress, name_dao, description, proposalEndTime))
                 scheduler.add_job(end_proposal, "date", run_date=proposalEndTime, args=(chat_id, title, address, proposalAddress, name_dao, description, yes, no, abstain))
 
-                await bot.send_message(chat_id = chat_id, text = text, reply_markup=keyboard) 
+                await bot.send_message(chat_id = chat_id, text = text, reply_markup=keyboard, disable_web_page_preview=True) 
             
 
 # Publish a post at the start of voting
@@ -268,7 +268,7 @@ async def start_proposal(chat_id, title, address, proposalAddress, name_dao, des
     keyboard = types.InlineKeyboardMarkup(row_width=1)
     keyboard.add(*buttons)
 
-    await bot.send_message(chat_id = chat_id, text = text, reply_markup=keyboard) 
+    await bot.send_message(chat_id = chat_id, text = text, reply_markup=keyboard, disable_web_page_preview=True) 
 
 
 
@@ -276,10 +276,10 @@ async def start_proposal(chat_id, title, address, proposalAddress, name_dao, des
 async def end_proposal(chat_id, title, address, proposalAddress, name_dao, description, yes, no, abstain):
     if (yes is None) and (no is None) and (abstain is None):
         # no votes
-        text = f"🏁 Voting has ended!\n\n🔵 Voting: {description}\n📜 Proposal: {name_dao}\n\nUnfortunately, the proposal didn't collect a single vote."
+        text = f"🏁 Voting has ended!\n\n🔵 Voting: {description}\n📜 Proposal: {name_dao}\n\nUnfortunately, the proposal didn't collect any votes."
     else:
         # are votes
-        text = f'🏁 Voting has ended!\n\n🔵 Voting: {description}\n📜 Proposal: {name_dao}\n\n📊 Results:\n✅ For: {yes}\n❌ Against: {no}\n🤐 Abstain: {abstain}\n\nThank you for participating in the voting!'
+        text = f'🏁 Voting has ended!\n\n🔵 Voting: {description}\n📜 Proposal: {name_dao}\n\n📊 Results:\n✅ Yes: {yes}\n❌ Against: {no}\n🤐 Abstain: {abstain}\n\nThank you for participating in the voting!'
 
     # Create buttons with DAOs
     buttons = [types.InlineKeyboardButton(text=title, url = f"{config.prod}/{address}/proposal/{proposalAddress}")] # names[i]
@@ -288,7 +288,7 @@ async def end_proposal(chat_id, title, address, proposalAddress, name_dao, descr
     keyboard = types.InlineKeyboardMarkup(row_width=1)
     keyboard.add(*buttons)
 
-    await bot.send_message(chat_id = chat_id, text = text, reply_markup=keyboard) 
+    await bot.send_message(chat_id = chat_id, text = text, reply_markup=keyboard, disable_web_page_preview=True) 
 
 
 
@@ -346,7 +346,7 @@ async def post_info_proposals_daily():
             keyboard = types.InlineKeyboardMarkup(row_width=1)
             keyboard.add(*buttons)
 
-            await bot.send_message(chat_id = chat_id, text = text, reply_markup=keyboard) 
+            await bot.send_message(chat_id = chat_id, text = text, reply_markup=keyboard, disable_web_page_preview=True) 
 
 
 
